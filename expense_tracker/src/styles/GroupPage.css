@@ -1,0 +1,135 @@
+ /* General Styles */
+ body {
+     font-family: 'Arial', sans-serif;
+     margin: 0;
+     padding: 0;
+     background-color: #f4f4f4;
+ }
+
+ .container {
+     display: flex;
+     justify-content: space-around;
+     padding: 20px;
+ }
+
+ /* User Section Styles */
+ .user-section {
+     width: 300px;
+     background-color: #fff;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     padding: 20px;
+ }
+
+ .btn-AddUser,
+ .btn-AddTransaction {
+     background-color: #3498db;
+     color: #fff;
+     border: none;
+     padding: 10px 15px;
+     margin-bottom: 10px;
+     cursor: pointer;
+ }
+
+ .UserList {
+     list-style-type: none;
+     padding: 0;
+ }
+
+ .user {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 10px;
+     border-bottom: 1px solid #eee;
+ }
+
+ .checkbox {
+     margin-right: 10px;
+ }
+
+ .btn-Add {
+     cursor: pointer;
+     padding: 5px 10px;
+     background-color: #2ecc71;
+     color: #fff;
+ }
+
+ /* Transaction Section Styles */
+ .transaction-section {
+     width: 400px;
+     background-color: #fff;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     padding: 20px;
+ }
+
+ .text {
+     width: 100%;
+     padding: 8px;
+     margin-bottom: 10px;
+ }
+
+ .custom-dropdown {
+     position: relative;
+     margin-bottom: 10px;
+ }
+
+ .selected-option,
+ .dropdown-options div {
+     padding: 10px;
+     background-color: #3498db;
+     color: #fff;
+     cursor: pointer;
+ }
+
+ .dropdown-options {
+     position: absolute;
+     top: 100%;
+     left: 0;
+     background-color: #fff;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     display: none;
+ }
+
+ /* Group Users and Transactions Styles */
+ .group-section {
+     flex: 1;
+     margin-left: 20px;
+ }
+
+ h2 {
+     color: #333;
+ }
+
+ .users,
+ .transactions {
+     list-style-type: none;
+     padding: 0;
+ }
+
+ .User,
+ .transaction {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 10px;
+     border-bottom: 1px solid #eee;
+ }
+
+ .delete {
+     cursor: pointer;
+     color: #e74c3c;
+ }
+
+ /* Responsive Styles */
+ @media (max-width: 768px) {
+     .container {
+         flex-direction: column;
+     }
+
+     .user-section,
+     .transaction-section,
+     .group-section {
+         width: 100%;
+         margin: 0;
+     }
+ }
