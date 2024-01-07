@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { API_URL } from "../constants";
 
 export default function MainPage() {
   const [showForm, setShowForm] = useState(false);
@@ -14,7 +15,7 @@ export default function MainPage() {
   const [showUser, setShowUser] = useState(false);
 
   const fetchUserGroups = () => {
-    fetch("/GetAllGroups")
+    fetch(API_URL + "/GetAllGroups")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.status}`);
@@ -32,14 +33,14 @@ export default function MainPage() {
   const handleNewUser = async () => {
     setShowUser(false);
     try {
-      const newUser = await fetch("/AddUser", {
+      const newUser = await fetch(API_URL + "/AddUser", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          UserId: newUserId,
-          UserName: newUserName,
+          UserId: newUserId, // user id not needed
+          name: newUserName,
         }),
       });
 
@@ -57,7 +58,7 @@ export default function MainPage() {
   };
 
   const fetchUsers = () => {
-    fetch("/GetAllUsers")
+    fetch(API_URL + "/GetAllUsers")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.status}`);
@@ -65,6 +66,7 @@ export default function MainPage() {
         return response.json();
       })
       .then((data) => {
+        console.log(data);
         setusers(data);
       })
       .catch((error) => {
@@ -81,9 +83,9 @@ export default function MainPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          GroupName: newGroupName,
-          GroupId: newGroupId,
-          UserIds: selectedUserIds,
+          groupName: newGroupName,
+          GroupId: newGroupId, // group id not needed (backed auto inderts it)
+          userId: selectedUserIds,
         }),
       });
 
@@ -105,7 +107,7 @@ export default function MainPage() {
   useEffect(() => {
     fetchUserGroups();
     fetchUsers();
-  }, [users, userGroups]);
+  }, []);
 
   const handleGroupSelection = (groupId) => {
     setSelectedGroupId(groupId);
@@ -147,22 +149,22 @@ export default function MainPage() {
                 <h2>User List</h2>
                 <ul>
                   {users.map((user) => (
-                    <li key={user.Id}>
+                    <li key={user.id}>
                       <label>
                         <input
                           type="checkbox"
-                          checked={selectedUserIds.includes(user.Id)}
+                          checked={selectedUserIds.includes(user.id)}
                           onChange={() =>
                             setSelectedUserIds((prevSelectedUsers) =>
-                              prevSelectedUsers.includes(user.Id)
+                              prevSelectedUsers.includes(user.id)
                                 ? prevSelectedUsers.filter(
-                                    (id) => id !== user.Id
+                                    (id) => id !== user.id
                                   )
-                                : [...prevSelectedUsers, user.Id]
+                                : [...prevSelectedUsers, user.id]
                             )
                           }
                         />
-                        {user.Name}
+                        {user.name}
                       </label>
                     </li>
                   ))}
